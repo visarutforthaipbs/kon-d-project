@@ -4,7 +4,7 @@ const theme = extendTheme({
   fonts: {
     heading:
       'Bai Jamjuree, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
-    body: 'Montserrat, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
+    body: 'Bai Jamjuree, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif',
   },
   colors: {
     brand: {
@@ -21,13 +21,6 @@ const theme = extendTheme({
           fontWeight: "700",
           fontDisplay: "swap",
           src: "url('/fonts/BaiJamjuree-Bold.ttf') format('truetype')",
-        },
-        {
-          fontFamily: "Montserrat",
-          fontStyle: "normal",
-          fontWeight: "600",
-          fontDisplay: "swap",
-          src: "url('/fonts/Montserrat-SemiBold.ttf') format('truetype')",
         },
       ],
       body: {
@@ -50,7 +43,7 @@ const theme = extendTheme({
       baseStyle: {
         borderRadius: "2xl",
         fontSize: "16px",
-        fontWeight: "600",
+        fontWeight: "700",
         fontFamily: "body",
       },
       variants: {

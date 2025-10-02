@@ -46,7 +46,7 @@ const WordCloudCanvas = ({ words }: WordCloudProps) => {
       .words(wordsWithSize)
       .padding(8) // More padding for sentences
       .rotate(() => 0) // No rotation for better readability of sentences
-      .font("Montserrat, Arial, sans-serif") // Use custom font
+      .font("Bai Jamjuree, Arial, sans-serif") // Use custom font
       .fontSize((d) => d.size || 14)
       .on("end", (words) => {
         // Draw words
@@ -61,7 +61,7 @@ const WordCloudCanvas = ({ words }: WordCloudProps) => {
             if (word.rotate) {
               context.rotate((word.rotate * Math.PI) / 180);
             }
-            context.font = `${word.size}px Montserrat, Arial, sans-serif`;
+            context.font = `${word.size}px Bai Jamjuree, Arial, sans-serif`;
             context.fillText(word.text, 0, 0);
             context.restore();
           }

@@ -23,13 +23,6 @@ export default function App({ Component, pageProps }: AppProps) {
           type="font/ttf"
           crossOrigin="anonymous"
         />
-        <link
-          rel="preload"
-          href="/fonts/Montserrat-SemiBold.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
       </Head>
       <ChakraProvider theme={theme}>
         <Component {...pageProps} />
