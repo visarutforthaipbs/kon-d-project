@@ -1,6 +1,18 @@
-import { Box, Text, Flex, Image, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Flex,
+  Image,
+  Link,
+  Button,
+  Collapse,
+  VStack,
+} from "@chakra-ui/react";
+import { useState } from "react";
 
 const Footer = () => {
+  const [showQR, setShowQR] = useState(false);
+
   const logos = [
     "/image/logos/Asset 2fung-favicon.png",
     "/image/logos/Asset 3fung-favicon.png",
@@ -13,6 +25,39 @@ const Footer = () => {
 
   return (
     <Box as="footer" py={8} px={4} bg="brand.orange" width="100%">
+      {/* QR Code Section */}
+      <VStack spacing={4} mb={6}>
+        <Button
+          onClick={() => setShowQR(!showQR)}
+          variant="outline"
+          size="sm"
+          color="white"
+          borderColor="white"
+          _hover={{
+            bg: "white",
+            color: "brand.orange",
+          }}
+        >
+          {showQR ? "ซ่อน QR Code" : "แสดง QR Code"}
+        </Button>
+
+        <Collapse in={showQR} animateOpacity>
+          <VStack spacing={3}>
+            <Text fontSize="sm" color="white" textAlign="center">
+              สแกน QR Code เพื่อเข้าสู่แบบสำรวจ
+            </Text>
+            <Box bg="white" p={3} borderRadius="lg" shadow="md">
+              <Image
+                src="/image/logos/Kon-D-Project-QR-code.jpg"
+                alt="QR Code สำหรับแบบสำรวจเสียงเยาวชนไทย"
+                maxW={{ base: "150px", md: "200px" }}
+                objectFit="contain"
+              />
+            </Box>
+          </VStack>
+        </Collapse>
+      </VStack>
+
       {/* Partner Logos */}
       <Flex
         justify="center"
@@ -27,8 +72,8 @@ const Footer = () => {
             <Image
               src={logo}
               alt={`Partner logo ${index + 1}`}
-              maxH="60px"
-              maxW="120px"
+              maxH={{ base: "40px", md: "60px" }}
+              maxW={{ base: "80px", md: "120px" }}
               objectFit="contain"
               opacity={0.8}
               _hover={{ opacity: 1 }}

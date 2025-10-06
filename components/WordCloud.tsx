@@ -14,7 +14,7 @@ interface WordCloudProps {
 const WordCloudCanvas = ({ words }: WordCloudProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
+  const renderWordCloud = () => {
     if (!words.length || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
@@ -25,19 +25,30 @@ const WordCloudCanvas = ({ words }: WordCloudProps) => {
     // Clear canvas
     context.clearRect(0, 0, width, height);
 
-    // Prepare words for d3-cloud
+    // Detect mobile screen size
+    const isMobile = window.innerWidth < 768; // md breakpoint in Chakra UI
+
+    // Prepare words for d3-cloud with responsive sizing
     const maxValue = Math.max(...words.map((w) => w.value));
     const minValue = Math.min(...words.map((w) => w.value));
 
     const wordsWithSize = words.map((word) => ({
       text: word.text,
-      size: Math.max(
-        14,
-        Math.min(
-          32,
-          14 + ((word.value - minValue) / (maxValue - minValue || 1)) * 18
-        )
-      ), // Smaller size range for sentences
+      size: isMobile
+        ? Math.max(
+            24,
+            Math.min(
+              60,
+              24 + ((word.value - minValue) / (maxValue - minValue || 1)) * 36
+            )
+          ) // Much larger for mobile
+        : Math.max(
+            14,
+            Math.min(
+              32,
+              14 + ((word.value - minValue) / (maxValue - minValue || 1)) * 18
+            )
+          ), // Original for desktop
       value: word.value,
     }));
 
@@ -69,6 +80,18 @@ const WordCloudCanvas = ({ words }: WordCloudProps) => {
       });
 
     layout.start();
+  };
+
+  useEffect(() => {
+    renderWordCloud();
+
+    // Add resize listener for responsive updates
+    const handleResize = () => {
+      setTimeout(renderWordCloud, 100); // Small delay to avoid too frequent updates
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [words]);
 
   return (
