@@ -37,18 +37,6 @@ const Footer = () => {
           </Box>
         ))}
       </Flex>
-
-      {/* Credit Text */}
-      <Text fontSize="sm" color="white" textAlign="center" mb={4}>
-        <Link
-          href="https://www.pubint.site/"
-          isExternal
-          textDecoration="underline"
-          _hover={{ opacity: 0.8 }}
-        >
-          เครื่องมือสำรวจความเห็นโดยทีม PI
-        </Link>
-      </Text>
     </Box>
   );
 };

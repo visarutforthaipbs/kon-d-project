@@ -113,12 +113,68 @@ const QuestionCard = ({
   const [text, setText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [wordCount, setWordCount] = useState(0);
   const toast = useToast();
+
+  // Function to count words in Thai text
+  const countWords = (inputText: string): number => {
+    if (!inputText.trim()) return 0;
+
+    try {
+      const segmenter = new Intl.Segmenter("th", { granularity: "word" });
+      const segments = Array.from(segmenter.segment(inputText));
+
+      const words = segments.filter((segment) => {
+        const token = segment.segment.trim();
+        // Count meaningful words (not punctuation or spaces)
+        return token.length > 0 && !/^[\s\p{P}\p{N}]+$/u.test(token);
+      });
+
+      return words.length;
+    } catch (error) {
+      // Fallback: simple word counting
+      return inputText
+        .trim()
+        .split(/[\s\p{P}]+/u)
+        .filter((word) => word.length > 0).length;
+    }
+  };
+
+  // Handle text change with word limit
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = e.target.value;
+    const words = countWords(newText);
+
+    if (words <= 15) {
+      setText(newText);
+      setWordCount(words);
+    } else {
+      // Show warning toast if exceeding limit
+      toast({
+        title: "เกินจำนวนคำที่กำหนด",
+        description: "กรุณาใส่ไม่เกิน 15 คำ",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  };
 
   const handleSubmit = async () => {
     if (!text.trim()) {
       toast({
         title: "กรุณาใส่คำตอบ",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    if (wordCount > 15) {
+      toast({
+        title: "เกินจำนวนคำที่กำหนด",
+        description: "กรุณาใส่ไม่เกิน 15 คำ",
         status: "warning",
         duration: 3000,
         isClosable: true,
@@ -142,6 +198,7 @@ const QuestionCard = ({
 
       if (response.ok) {
         setText("");
+        setWordCount(0);
         setHasSubmitted(true);
         toast({
           title: "ส่งคำตอบแล้ว",
@@ -189,15 +246,24 @@ const QuestionCard = ({
         </Heading>
 
         <VStack spacing={4} align="stretch">
-          <Textarea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="พิมพ์ความเห็นของคุณสั้น ๆ (ไม่ระบุตัวตน)"
-            size="lg"
-            minH="120px"
-            maxLength={1000}
-            fontSize="16px"
-          />
+          <VStack spacing={2} align="stretch">
+            <Textarea
+              value={text}
+              onChange={handleTextChange}
+              placeholder="พิมพ์ความเห็นของคุณสั้น ๆ (ไม่เกิน 15 คำ)"
+              size="lg"
+              minH="120px"
+              maxLength={1000}
+              fontSize="16px"
+            />
+            <Text
+              fontSize="sm"
+              color={wordCount > 12 ? "red.500" : "gray.500"}
+              textAlign="right"
+            >
+              {wordCount}/15 คำ
+            </Text>
+          </VStack>
 
           <HStack spacing={4} justify="center">
             <Button

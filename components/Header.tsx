@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Image } from "@chakra-ui/react";
+import { Box, Heading, Text, Image, Link } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 
 const float = keyframes`
@@ -29,7 +29,16 @@ const Header = () => {
         transition="all 0.3s ease"
       />
       <Text fontSize="md" fontWeight="500">
-        สำรวจความคิดเห็น 2 คำถาม เพื่อสะท้อนภาพรวมสังคม
+        จัดทำแบบสำรวจ
+        <Link
+          href="https://www.pubint.site/"
+          isExternal
+          textDecoration="underline"
+          _hover={{ opacity: 0.8 }}
+        >
+          โดยทีม PI
+        </Link>{" "}
+        ภายใต้โครงการ Good Society Day 2025 ที่ไทยพีบีเอสร่วมกับภาคีเครือข่าย
       </Text>
     </Box>
   );

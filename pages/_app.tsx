@@ -7,11 +7,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>เสียงเยาวชนไทย - สำรวจความคิดเห็น</title>
+        <title>แบบสำรวจความเห็น Good Society Day 2025</title>
         <link rel="icon" href="/image/logos/mainlogo.png" />
         <meta
           name="description"
-          content="สำรวจความคิดเห็น 2 คำถาม เพื่อสะท้อนภาพรวมสังคม"
+          content="จัดทำแบบสำรวจโดยทีม PI ภายใต้โครงการ Good Society Day 2025 ที่ไทยพีบีเอสร่วมกับภาคีเครือข่าย"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
