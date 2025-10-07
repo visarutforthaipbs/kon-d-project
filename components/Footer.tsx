@@ -72,8 +72,16 @@ const Footer = () => {
             <Image
               src={logo}
               alt={`Partner logo ${index + 1}`}
-              maxH={{ base: "40px", md: "60px" }}
-              maxW={{ base: "80px", md: "120px" }}
+              maxH={
+                index === 0
+                  ? { base: "60px", md: "90px" }
+                  : { base: "40px", md: "60px" }
+              }
+              maxW={
+                index === 0
+                  ? { base: "120px", md: "180px" }
+                  : { base: "80px", md: "120px" }
+              }
               objectFit="contain"
               opacity={0.8}
               _hover={{ opacity: 1 }}

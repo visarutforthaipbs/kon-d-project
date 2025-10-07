@@ -36,9 +36,9 @@ const Header = () => {
           textDecoration="underline"
           _hover={{ opacity: 0.8 }}
         >
-          โดยทีม PI
+          โดยทีม PI - Public Intelligence
         </Link>{" "}
-        ภายใต้โครงการ Good Society Day 2025 ที่ไทยพีบีเอสร่วมกับภาคีเครือข่าย
+        ด้วยความร่วมมือของไทยพีบีเอสและภาคีเครือข่าย
       </Text>
     </Box>
   );

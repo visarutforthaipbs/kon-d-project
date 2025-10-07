@@ -145,14 +145,14 @@ const QuestionCard = ({
     const newText = e.target.value;
     const words = countWords(newText);
 
-    if (words <= 15) {
+    if (words <= 30) {
       setText(newText);
       setWordCount(words);
     } else {
       // Show warning toast if exceeding limit
       toast({
         title: "เกินจำนวนคำที่กำหนด",
-        description: "กรุณาใส่ไม่เกิน 15 คำ",
+        description: "กรุณาใส่ไม่เกิน 30 คำ",
         status: "warning",
         duration: 2000,
         isClosable: true,
@@ -171,10 +171,10 @@ const QuestionCard = ({
       return;
     }
 
-    if (wordCount > 15) {
+    if (wordCount > 30) {
       toast({
         title: "เกินจำนวนคำที่กำหนด",
-        description: "กรุณาใส่ไม่เกิน 15 คำ",
+        description: "กรุณาใส่ไม่เกิน 30 คำ",
         status: "warning",
         duration: 3000,
         isClosable: true,
@@ -250,7 +250,7 @@ const QuestionCard = ({
             <Textarea
               value={text}
               onChange={handleTextChange}
-              placeholder="พิมพ์ความเห็นของคุณสั้น ๆ (ไม่เกิน 15 คำ)"
+              placeholder="พิมพ์ความเห็นของคุณสั้น ๆ (ไม่เกิน 30 คำ)"
               size="lg"
               minH="120px"
               maxLength={1000}
@@ -258,10 +258,10 @@ const QuestionCard = ({
             />
             <Text
               fontSize="sm"
-              color={wordCount > 12 ? "red.500" : "gray.500"}
+              color={wordCount > 27 ? "red.500" : "gray.500"}
               textAlign="right"
             >
-              {wordCount}/15 คำ
+              {wordCount}/30 คำ
             </Text>
           </VStack>
 
